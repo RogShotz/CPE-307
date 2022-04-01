@@ -8,7 +8,7 @@ function Table(props) {
     </table>
   );
 }
-export default Table;
+
 
 function TableBody(props) {
   const rows = props.characterData.map((row, index) => {
@@ -41,3 +41,5 @@ function TableHeader() {
     </thead>
   );
 }
+
+export default Table;
