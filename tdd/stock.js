@@ -1,3 +1,5 @@
+const shareSale = require("./ShareSaleException.js");
+
 const arr = new Array();
 
 class Portfolio {
@@ -8,12 +10,31 @@ class Portfolio {
         arr.push(ticker, shares);
     }
 
+    sellShares(ticker, shares) {
+        let index = arr.findIndex((element) => element === ticker);
+
+        if (arr[index + 1] > shares){
+            arr[index + 1] = arr[index + 1] - shares;
+        } else if (arr[index + 1] == shares) {
+            arr.splice(index,index);
+        } else {
+             throw new shareSale.ShareSaleException('Oversell')
+        }
+    }
+
     getShares() {
         return arr;
     }
 
     getNumShares() {
         return arr.length / 2;
+    }
+
+    getShareAmt(ticker) {
+        let index = arr.findIndex((element) => element === ticker);
+
+        return Array(arr[index], arr[index + 1])
+
     }
 }
 
